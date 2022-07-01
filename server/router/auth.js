@@ -1,8 +1,8 @@
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const authenticate = require("../middleware/authenticate");
+// const authenticate = require("../middleware/authenticate");
 
 
 require('../db/conn');
@@ -12,35 +12,6 @@ router.get('/', (req, res) => {
     res.send(`Hello world from the server rotuer js`);
 });
 
-
-
-// using promises  
-
-// router.post('/register', (req, res) => {
-
-//     const { name, email, phone, work, password, cpassword} = req.body;
-    
-//     if (!name || !email || !phone || !work || !password || !cpassword) {
-//         return res.status(422).json({ error: "Plz filled the field properly" });
-//     }
-
-//     User.findOne({ email: email })
-//         .then((userExist) => {
-//             if (userExist) {
-//                 return res.status(422).json({ error: "Email already Exist" });
-//             }
-            
-//             const user = new User({ name, email, phone, work, password, cpassword });
-
-//             user.save().then(() => {
-//                 res.status(201).json({ message: "user registered successfuly" });
-//             }).catch((err) => res.status(500).json({ error: "Failed to registered" }));
-            
-//         }).catch(err => { console.log(err); });
-
-// });
-
-// Async-Await 
 
 router.post('/register', async (req, res) => {
 
@@ -96,13 +67,13 @@ router.post('/signin', async (req, res) => {
             res.status(400).json({ error: "Invalid Credientials " });
         } else {
              // need to genereate the token and stored cookie after the password match 
-            token = await userLogin.generateAuthToken();
-            console.log(token);
+            // token = await userLogin.generateAuthToken();
+            // console.log(token);
 
-            res.cookie("jwtoken", token, {
-                expires: new Date(Date.now() + 25892000000),
-                httpOnly:true
-            });
+            // res.cookie("jwtoken", token, {
+            //     expires: new Date(Date.now() + 25892000000),
+            //     httpOnly:true
+            // });
             
             res.json({ message: "user Signin Successfully" });
         }
@@ -118,20 +89,20 @@ router.post('/signin', async (req, res) => {
 
 // about us ka page 
 
-router.get('/about', authenticate ,(req, res) => {
+router.get('/about' ,(req, res) => {
     console.log(`Hello my About`);
     res.send(req.rootUser);
 });
 
 // get user data for contact us and home page 
-router.get('/getdata', authenticate, (req, res) => {
+router.get('/getdata', (req, res) => {
     console.log(`Hello my About`);
     res.send(req.rootUser);
 });
 
 // contact us page 
 
-router.post('/contact', authenticate, async (req, res) => {
+router.post('/contact', async (req, res) => {
     try {
 
         const { name, email, phone, message } = req.body;

@@ -1,12 +1,17 @@
 const mongoose = require('mongoose');
 
-const DB = process.env.DATABASE;
+// const DB = process.env.DATABASE ;
 
-mongoose.connect(DB, {
+mongoose.connect("mongodb://localhost:27017/mern-project", {
     useNewUrlParser: true,
-    useCreateIndex: true,
+     useCreateIndex: true,
     useUnifiedTopology: true,
-    useFindAndModify:false
-}).then(() => {
-    console.log(`connnection successful`);
-}).catch((err) => console.log(`no connection ${err}`));
+    useFindAndModify: false
+}, (err) => {
+    if (!err) {
+        console.log('connection success');
+    } else {
+        console.log('connection not success');
+
+    }
+})
