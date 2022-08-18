@@ -3,4 +3,4 @@ config.env
 
 env
 
-./app.js
+./app
