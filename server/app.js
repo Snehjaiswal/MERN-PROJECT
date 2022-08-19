@@ -17,7 +17,6 @@ app.use(require('./router/auth'));
 
 const PORT = process.env.PORT || 5000;
 
-
 app.get('/signup', (req, res) => {
     res.send(`Hello Registration world from the server`);
 });
